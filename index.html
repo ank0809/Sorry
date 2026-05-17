@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Betuuu 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffd6e0,#fbc2eb);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.card{
+  width:92%;
+  max-width:430px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:35px 25px;
+  text-align:center;
+  color:white;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  z-index:5;
+}
+
+h1{
+  font-family:'Sacramento',cursive;
+  font-size:3.3em;
+  margin-bottom:10px;
+}
+
+.sub{
+  line-height:1.7;
+  margin-bottom:22px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  margin-top:10px;
+  font-size:1rem;
+  cursor:pointer;
+  color:white;
+  background:#ff4d88;
+  transition:.3s;
+}
+
+button:hover{
+  transform:scale(1.04);
+}
+
+.music{
+  background:#9b5de5;
+}
+
+/* Popup */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(8px);
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+  z-index:20;
+}
+
+.box{
+  width:100%;
+  max-width:430px;
+  max-height:88vh;
+  overflow-y:auto;
+  background:white;
+  color:#333;
+  border-radius:25px;
+  padding:26px 22px;
+  text-align:center;
+  box-shadow:0 0 30px rgba(255,105,180,.45);
+}
+
+.box h2{
+  font-family:'Sacramento',cursive;
+  color:#ff4d88;
+  font-size:2.5em;
+  margin-bottom:10px;
+}
+
+.text{
+  white-space:pre-line;
+  line-height:1.8;
+  min-height:240px;
+}
+
+.next{
+  margin-top:15px;
+  background:#ff6fa6;
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 7s linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh) scale(.7);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh) scale(1.4);
+    opacity:0;
+  }
+}
+
+/* Sparkles */
+.spark{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:gold;
+  border-radius:50%;
+  box-shadow:0 0 10px gold;
+  animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SONG -->
+<audio id="bgMusic" loop>
+<source src="https://raw.githubusercontent.com/ank0809/Valentine/ef63e0e79e66cacbf8d548255e1b93cc955d5a32/rhnuma_raone_srk.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+
+<h1>For My Betuuu 💖</h1>
+
+<p class="sub">
+I know things feel heavy sometimes...  
+but please remember one thing —  
+you’ll never face anything alone 🤍
+</p>
+
+<button onclick="openPopup()">Open My Heart 💌</button>
+<button class="music" onclick="toggleMusic()">Music 🎵</button>
+
+</div>
+
+<div class="popup" id="popup">
+<div class="box">
+
+<h2>I’m Always Here 💖</h2>
+
+<div class="text" id="typedText"></div>
+
+<button class="next" onclick="closePopup()">Forever Yours 🤍</button>
+
+</div>
+</div>
+
+<script>
+
+const music=document.getElementById("bgMusic");
+
+/* autoplay */
+document.body.addEventListener("click",()=>{
+music.play().catch(()=>{});
+},{once:true});
+
+function toggleMusic(){
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+}
+
+const lines=[
+"Betuuu... I’m really sorry 🤍",
+"",
+"I know sometimes you feel low...",
+"stressed...",
+"emotionally tired...",
+"and overthink everything.",
+"",
+"But please don’t carry everything alone.",
+"",
+"I’ll always be there for you.",
+"",
+"No matter what problem comes...",
+"we’ll face it together.",
+"",
+"Any fear...",
+"any doubt...",
+"any stress in your heart...",
+"just tell me once.",
+"",
+"I’ll take care of everything I can 💖",
+"",
+"And betuuu...",
+"whenever you feel like meeting me...",
+"",
+"just one message from you",
+"will be enough for me",
+"to reach your place 🤍",
+"",
+"I mean that.",
+"",
+"I never want you to feel alone.",
+"",
+"Your smile matters to me.",
+"Your peace matters to me.",
+"You matter to me.",
+"",
+"So please don’t worry too much okay? 🫶",
+"",
+"Focus on yourself.",
+"Eat properly.",
+"Sleep properly.",
+"And slowly everything will become okay.",
+"",
+"I’ll stay beside you...",
+"in every phase of life 💖"
+];
+
+function openPopup(){
+document.getElementById("popup").style.display="flex";
+startTyping();
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+document.getElementById("typedText").innerHTML="";
+}
+
+function startTyping(){
+
+const box=document.getElementById("typedText");
+box.innerHTML="";
+
+let i=0;
+
+function nextLine(){
+
+if(i>=lines.length) return;
+
+const div=document.createElement("div");
+box.appendChild(div);
+
+let text=lines[i];
+let j=0;
+
+const timer=setInterval(()=>{
+
+if(j<text.length){
+div.textContent += text.charAt(j);
+j++;
+}else{
+clearInterval(timer);
+i++;
+setTimeout(nextLine,220);
+}
+
+},28);
+
+}
+
+nextLine();
+}
+
+/* hearts */
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(5+Math.random()*3)+"s";
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.remove();
+},8000);
+
+},450);
+
+/* sparkles */
+setInterval(()=>{
+const s=document.createElement("div");
+s.className="spark";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(4+Math.random()*3)+"s";
+
+document.body.appendChild(s);
+
+setTimeout(()=>{
+s.remove();
+},7000);
+
+},300);
+
+</script>
+
+</body>
+</html>
