@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -55,6 +56,7 @@ h1{
 .sub{
   line-height:1.7;
   margin-bottom:22px;
+  font-size:1rem;
 }
 
 button{
@@ -78,7 +80,8 @@ button:hover{
   background:#9b5de5;
 }
 
-/* Popup */
+/* POPUP */
+
 .popup{
   display:none;
   position:fixed;
@@ -115,6 +118,7 @@ button:hover{
   white-space:pre-line;
   line-height:1.8;
   min-height:240px;
+  font-size:1rem;
 }
 
 .next{
@@ -122,11 +126,13 @@ button:hover{
   background:#ff6fa6;
 }
 
-/* Floating hearts */
+/* FLOATING HEARTS */
+
 .heart{
   position:absolute;
   font-size:20px;
   animation:float 7s linear infinite;
+  opacity:.9;
 }
 
 @keyframes float{
@@ -134,13 +140,15 @@ button:hover{
     transform:translateY(100vh) scale(.7);
     opacity:1;
   }
+
   to{
     transform:translateY(-10vh) scale(1.4);
     opacity:0;
   }
 }
 
-/* Sparkles */
+/* GOLDEN SPARKLES */
+
 .spark{
   position:absolute;
   width:4px;
@@ -152,15 +160,22 @@ button:hover{
 }
 
 @keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);opacity:0;}
+  from{
+    transform:translateY(-10vh);
+  }
+
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- SONG -->
+<!-- MUSIC -->
 <audio id="bgMusic" loop>
 <source src="https://raw.githubusercontent.com/ank0809/Valentine/ef63e0e79e66cacbf8d548255e1b93cc955d5a32/rhnuma_raone_srk.mp3" type="audio/mpeg">
 </audio>
@@ -175,19 +190,46 @@ but please remember one thing —
 you’ll never face anything alone 🤍
 </p>
 
-<button onclick="openPopup()">Open My Heart 💌</button>
-<button class="music" onclick="toggleMusic()">Music 🎵</button>
+<button onclick="openPopup()">
+Open My Heart 💌
+</button>
+
+<button class="music" onclick="toggleMusic()">
+Music 🎵
+</button>
 
 </div>
 
-<div class="popup" id="popup">
+<!-- POPUP 1 -->
+
+<div class="popup" id="popup1">
+
 <div class="box">
 
 <h2>I’m Always Here 💖</h2>
 
-<div class="text" id="typedText"></div>
+<div class="text" id="typedText1"></div>
 
-<button class="next" onclick="closePopup()">Forever Yours 🤍</button>
+<button class="next" onclick="openSecondPopup()">
+Next 💌
+</button>
+
+</div>
+</div>
+
+<!-- POPUP 2 -->
+
+<div class="popup" id="popup2">
+
+<div class="box">
+
+<h2>Forever With You 🤍</h2>
+
+<div class="text" id="typedText2"></div>
+
+<button class="next" onclick="closePopup()">
+Always Yours 💖
+</button>
 
 </div>
 </div>
@@ -196,80 +238,170 @@ you’ll never face anything alone 🤍
 
 const music=document.getElementById("bgMusic");
 
-/* autoplay */
+/* AUTOPLAY FIX */
+
 document.body.addEventListener("click",()=>{
+
 music.play().catch(()=>{});
+
 },{once:true});
 
+/* MUSIC BUTTON */
+
 function toggleMusic(){
+
 if(music.paused){
+
 music.play();
+
 }else{
+
 music.pause();
-}
+
 }
 
-const lines=[
+}
+
+/* MESSAGE PART 1 */
+
+const lines1=[
+
 "Betuuu... I’m really sorry 🤍",
+
 "",
+
 "I know sometimes you feel low...",
+
 "stressed...",
+
 "emotionally tired...",
+
 "and overthink everything.",
+
 "",
+
 "But please don’t carry everything alone.",
+
 "",
+
 "I’ll always be there for you.",
+
 "",
+
 "No matter what problem comes...",
+
 "we’ll face it together.",
+
 "",
+
 "Any fear...",
+
 "any doubt...",
+
 "any stress in your heart...",
-"just tell me once.",
-"",
-"I’ll take care of everything I can 💖",
-"",
-"And betuuu...",
-"whenever you feel like meeting me...",
-"",
-"just one message from you",
-"will be enough for me",
-"to reach your place 🤍",
-"",
-"I mean that.",
-"",
-"I never want you to feel alone.",
-"",
-"Your smile matters to me.",
-"Your peace matters to me.",
-"You matter to me.",
-"",
-"So please don’t worry too much okay? 🫶",
-"",
-"Focus on yourself.",
-"Eat properly.",
-"Sleep properly.",
-"And slowly everything will become okay.",
-"",
-"I’ll stay beside you...",
-"in every phase of life 💖"
+
+"just tell me once."
+
 ];
 
+/* MESSAGE PART 2 */
+
+const lines2=[
+
+"I’ll take care of everything I can 💖",
+
+"",
+
+"And betuuu...",
+
+"whenever you feel like meeting me...",
+
+"",
+
+"just one message from you",
+
+"will be enough for me",
+
+"to reach your place 🤍",
+
+"",
+
+"I mean that.",
+
+"",
+
+"I never want you to feel alone.",
+
+"",
+
+"Your smile matters to me.",
+
+"Your peace matters to me.",
+
+"You matter to me.",
+
+"",
+
+"So please don’t worry too much okay? 🫶",
+
+"",
+
+"Focus on yourself.",
+
+"Eat properly.",
+
+"Sleep properly.",
+
+"And slowly everything will become okay.",
+
+"",
+
+"I’ll stay beside you...",
+
+"in every phase of life 💖"
+
+];
+
+/* OPEN FIRST POPUP */
+
 function openPopup(){
-document.getElementById("popup").style.display="flex";
-startTyping();
+
+document.getElementById("popup1").style.display="flex";
+
+startTyping("typedText1",lines1);
+
 }
+
+/* OPEN SECOND POPUP */
+
+function openSecondPopup(){
+
+document.getElementById("popup1").style.display="none";
+
+document.getElementById("popup2").style.display="flex";
+
+startTyping("typedText2",lines2);
+
+}
+
+/* CLOSE */
 
 function closePopup(){
-document.getElementById("popup").style.display="none";
-document.getElementById("typedText").innerHTML="";
+
+document.getElementById("popup2").style.display="none";
+
+document.getElementById("typedText1").innerHTML="";
+
+document.getElementById("typedText2").innerHTML="";
+
 }
 
-function startTyping(){
+/* TYPING EFFECT */
 
-const box=document.getElementById("typedText");
+function startTyping(elementId,lines){
+
+const box=document.getElementById(elementId);
+
 box.innerHTML="";
 
 let i=0;
@@ -279,20 +411,29 @@ function nextLine(){
 if(i>=lines.length) return;
 
 const div=document.createElement("div");
+
 box.appendChild(div);
 
 let text=lines[i];
+
 let j=0;
 
 const timer=setInterval(()=>{
 
 if(j<text.length){
+
 div.textContent += text.charAt(j);
+
 j++;
+
 }else{
+
 clearInterval(timer);
+
 i++;
+
 setTimeout(nextLine,220);
+
 }
 
 },28);
@@ -300,34 +441,51 @@ setTimeout(nextLine,220);
 }
 
 nextLine();
+
 }
 
-/* hearts */
+/* FLOATING HEARTS */
+
 setInterval(()=>{
+
 const h=document.createElement("div");
+
 h.className="heart";
+
 h.innerHTML="💖";
+
 h.style.left=Math.random()*100+"vw";
+
 h.style.animationDuration=(5+Math.random()*3)+"s";
+
 document.body.appendChild(h);
 
 setTimeout(()=>{
+
 h.remove();
+
 },8000);
 
 },450);
 
-/* sparkles */
+/* GOLDEN SPARKLES */
+
 setInterval(()=>{
+
 const s=document.createElement("div");
+
 s.className="spark";
+
 s.style.left=Math.random()*100+"vw";
+
 s.style.animationDuration=(4+Math.random()*3)+"s";
 
 document.body.appendChild(s);
 
 setTimeout(()=>{
+
 s.remove();
+
 },7000);
 
 },300);
